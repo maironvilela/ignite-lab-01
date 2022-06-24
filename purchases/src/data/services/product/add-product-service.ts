@@ -1,10 +1,10 @@
 import { Injectable } from '@nestjs/common';
+import { AddProductDTO } from '~/data/dto';
+import { AddProductRepository } from '~/data/protocols';
 import {
   AddProduct,
   AddProductModel
 } from '~/domain/usecases/product/add-product';
-import { AddProductDTO } from '../dto';
-import { AddProductRepository } from '../protocols';
 
 @Injectable()
 export class AddProductService implements AddProduct {
