@@ -1,5 +1,4 @@
-import { Injectable } from '@nestjs/common';
-import { AddProductService } from '~/data/services';
+import { AddProductUseCase } from '~/domain/usecases';
 import {
   Controller,
   HttpRequest,
@@ -8,9 +7,8 @@ import {
 import { internalServerError, ok } from '../helpers/http-helpers';
 import { ProductViewModel } from '../view-models/product';
 
-@Injectable()
 export class AddProductController implements Controller {
-  constructor(private addProduct: AddProductService) {}
+  constructor(private addProduct: AddProductUseCase) {}
   async handle(request: HttpRequest): Promise<HttpResponse<ProductViewModel>> {
     try {
       const { title } = request.body;
