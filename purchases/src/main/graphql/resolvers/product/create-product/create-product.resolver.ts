@@ -1,15 +1,15 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
-import slugify from 'slugify';
-import { ProductRepository } from '~/infra/db/repositories/product/product-repository';
 import { CreateProductInput } from '~/main/graphql/inputs/CreateProductInput';
 import { Product } from '~/main/graphql/models/product';
+import { resolverAdapter } from '~/presentation/adapters';
+import { AddProductController } from '~/presentation/controllers/add-products';
 
 @Resolver()
 export class CreateProductResolver {
-  constructor(private productRepository: ProductRepository) {}
+  constructor(private controller: AddProductController) {}
   @Mutation(() => Product)
   async createProduct(@Args('data') { title }: CreateProductInput) {
-    const slug = slugify(title, { lower: true });
-    return this.productRepository.add({ title, slug });
+    const request = { body: { title } };
+    return resolverAdapter(this.controller, request);
   }
 }

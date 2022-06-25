@@ -7,6 +7,7 @@ import { DataModule } from './data/data.module';
 import { DomainModule } from './domain/domain.module';
 import { InfraModule } from './infra/infra.module';
 import { MainModule } from './main/main.module';
+import { PresentationModule } from './presentation/presentation.module';
 
 @Module({
   imports: [
@@ -18,7 +19,8 @@ import { MainModule } from './main/main.module';
     GraphQLModule.forRoot({
       driver: ApolloDriver,
       autoSchemaFile: path.resolve(process.cwd(), 'src/schema.gql')
-    })
+    }),
+    PresentationModule
   ]
 })
 export class AppModule {}

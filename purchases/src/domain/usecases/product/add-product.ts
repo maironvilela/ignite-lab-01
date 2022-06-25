@@ -4,6 +4,6 @@ export type AddProductModel = {
   title: string;
 };
 
-export interface AddProduct {
+export interface AddProductUseCase {
   add: (product: AddProductModel) => Promise<Product>;
 }
