@@ -9,9 +9,10 @@ import { Controller } from '~/presentation/protocols';
 export class AddProductControllerFactory {
   constructor(private prisma: PrismaService) {}
   makeAddProductController(): Controller {
-    const addProductRepository = new ProductRepository(this.prisma);
+    const productRepository = new ProductRepository(this.prisma);
     const addProductService: AddProductUseCase = new AddProductService(
-      addProductRepository
+      productRepository,
+      productRepository
     );
     return new AddProductController(addProductService);
   }

@@ -1,3 +1,3 @@
 import { Product } from '~/domain/models';
 
-export type AddProductDTO = Product;
+export type ProductDTO = Product;

@@ -1,11 +1,17 @@
 import { Query, Resolver } from '@nestjs/graphql';
+import { resolverAdapter } from '~/main/adapters';
+import { ListProductControllerFactory } from '~/main/factories/list-products';
+import { Product } from '~/main/graphql/models/product';
 
 @Resolver()
 export class ListAllProductResolver {
-  // constructor(private prisma: PrismaService) {}
-
-  @Query(() => String)
+  constructor(
+    private listProductsControllerFactory: ListProductControllerFactory
+  ) {}
+  @Query(() => [Product])
   products() {
-    return 'this.prisma.product.findMany();';
+    const listProductsController =
+      this.listProductsControllerFactory.makeListProductController();
+    return resolverAdapter(listProductsController);
   }
 }

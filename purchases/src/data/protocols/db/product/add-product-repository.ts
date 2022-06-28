@@ -1,4 +1,4 @@
-import { AddProductDTO } from '~/data/dto/';
+import { ProductDTO } from '~/data/dto/';
 
 export type AddProductProps = {
   title: string;
@@ -6,5 +6,5 @@ export type AddProductProps = {
 };
 
 export interface AddProductRepository {
-  add: (data: AddProductProps) => Promise<AddProductDTO>;
+  add: (data: AddProductProps) => Promise<ProductDTO>;
 }

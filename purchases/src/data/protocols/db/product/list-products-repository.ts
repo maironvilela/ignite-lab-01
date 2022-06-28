@@ -1,5 +1,5 @@
-import { AddProductDTO } from '~/data/dto/';
+import { ProductDTO } from '~/data/dto/';
 
-export interface ListProductsRepository {
-  listProducts: () => Promise<AddProductDTO[]>;
+export interface ListProductsRepositoryProtocol {
+  listProducts: () => Promise<ProductDTO[]>;
 }

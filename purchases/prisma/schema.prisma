@@ -22,7 +22,7 @@ model Product {
 
   id String @id @default(uuid())
 
-  title String
+  title String @unique
   slug  String @unique
 
   createdAt DateTime @default(now())

@@ -1,10 +1,11 @@
 import { Module } from '@nestjs/common';
 import { InfraModule } from '~/infra/infra.module';
-import { AddProductService } from './services';
+import { AddProductService, FindProductByTitleService } from './services';
+import { ListProductService } from './services/product/list-products-service';
 
 @Module({
-  providers: [AddProductService],
-  exports: [AddProductService],
+  providers: [AddProductService, FindProductByTitleService, ListProductService],
+  exports: [AddProductService, FindProductByTitleService, ListProductService],
   imports: [InfraModule]
 })
 export class DataModule {}

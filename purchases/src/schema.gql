@@ -9,7 +9,7 @@ type Product {
 }
 
 type Query {
-  products: String!
+  products: [Product!]!
 }
 
 type Mutation {

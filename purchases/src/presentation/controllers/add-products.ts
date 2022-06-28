@@ -4,7 +4,8 @@ import {
   HttpRequest,
   HttpResponse
 } from '~/presentation/protocols';
-import { internalServerError, ok } from '../helpers/http-helpers';
+import { ProductAlreadyRegisteredError } from '../error/product-already-registered-error';
+import { badRequest, internalServerError, ok } from '../helpers/http-helpers';
 import { ProductViewModel } from '../view-models/product';
 
 export class AddProductController implements Controller {
@@ -14,6 +15,11 @@ export class AddProductController implements Controller {
       const { title } = request.body;
 
       const product = await this.addProduct.add({ title });
+
+      if (product === null) {
+        return badRequest(new ProductAlreadyRegisteredError());
+      }
+
       const productViewModel = ProductViewModel.map(product);
       return ok(productViewModel);
     } catch (error) {
