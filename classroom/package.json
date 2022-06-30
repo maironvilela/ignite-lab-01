@@ -5,6 +5,10 @@
   "author": "",
   "private": true,
   "license": "UNLICENSED",
+
+  "prisma": {
+    "schema": "src/infra/config/prisma/schema.prisma"
+  },
   "scripts": {
     "prebuild": "rimraf dist",
     "build": "nest build",
