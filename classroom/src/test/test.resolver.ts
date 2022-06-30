@@ -1,10 +1,12 @@
 import { Query, Resolver } from '@nestjs/graphql';
+import { PrismaService } from '../infra/db/prisma/prisma.service';
+import { Course } from './course';
 
 @Resolver()
 export class TestResolver {
-  @Query(() => String)
-  //@UseGuards(AuthorizationGuard)
+  constructor(private prisma: PrismaService) {}
+  @Query(() => [Course])
   async hello() {
-    return 'GraphQL ';
+    return await this.prisma.course.findMany();
   }
 }
