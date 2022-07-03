@@ -6,6 +6,7 @@ import * as path from 'path';
 import { InfraModule } from './infra/infra.module';
 import { TestResolver } from './test/test.resolver';
 import { DomainModule } from './domain/domain.module';
+import { DataModule } from './data/data.module';
 
 console.log(path.resolve(process.cwd(), 'src/graphql/schema.gql'));
 
@@ -21,6 +22,7 @@ console.log(path.resolve(process.cwd(), 'src/graphql/schema.gql'));
     }),
     InfraModule,
     DomainModule,
+    DataModule,
   ],
   controllers: [],
   providers: [TestResolver],
