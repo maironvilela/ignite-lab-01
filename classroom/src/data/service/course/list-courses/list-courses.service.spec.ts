@@ -33,4 +33,12 @@ describe('ListCoursesService', () => {
 
     expect(hashSpy).toHaveBeenCalled();
   });
+
+  it('should return all courses', async () => {
+    const { sut } = makeSut();
+
+    const response = await sut.execute();
+
+    expect(response.length).toBe(3);
+  });
 });
