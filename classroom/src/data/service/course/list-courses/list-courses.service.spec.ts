@@ -1,3 +1,4 @@
+import { faker } from '@faker-js/faker';
 import { ListCoursesRepository } from '~/data/protocols';
 import { Course } from '~/domain/models';
 import { ListCoursesService } from './list-courses.service';
@@ -35,10 +36,23 @@ describe('ListCoursesService', () => {
   });
 
   it('should return all courses', async () => {
-    const { sut } = makeSut();
+    const result = [
+      {
+        id: faker.datatype.uuid(),
+        title: faker.lorem.lines(),
+        slug: faker.lorem.lines(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
+    ];
 
+    const { sut, listCoursesRepositoryStub } = makeSut();
     const response = await sut.execute();
 
-    expect(response.length).toBe(3);
+    jest
+      .spyOn(listCoursesRepositoryStub, 'listCourses')
+      .mockReturnValueOnce(new Promise((resolve) => resolve(result)));
+
+    expect(response).toBe(0);
   });
 });
