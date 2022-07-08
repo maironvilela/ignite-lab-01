@@ -44,15 +44,24 @@ describe('ListCoursesService', () => {
         createdAt: new Date(),
         updatedAt: new Date(),
       },
+      {
+        id: faker.datatype.uuid(),
+        title: faker.lorem.lines(),
+        slug: faker.lorem.lines(),
+        createdAt: new Date(),
+        updatedAt: new Date(),
+      },
     ];
 
     const { sut, listCoursesRepositoryStub } = makeSut();
-    const response = await sut.execute();
 
     jest
       .spyOn(listCoursesRepositoryStub, 'listCourses')
       .mockReturnValueOnce(new Promise((resolve) => resolve(result)));
+    const response = await sut.execute();
 
-    expect(response).toBe(0);
+    console.log(response.length);
+
+    expect(response.length).toBe(2);
   });
 });
