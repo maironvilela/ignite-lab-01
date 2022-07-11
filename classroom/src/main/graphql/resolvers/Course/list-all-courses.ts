@@ -2,6 +2,7 @@ import { Query, Resolver } from '@nestjs/graphql';
 import { ListCoursesService } from '~/data/service/course/list-courses/list-courses.service';
 import { PrismaService } from '~/infra/db/prisma/prisma.service';
 import { CoursePrismaRepository } from '~/infra/db/prisma/repositories/course/course-prisma';
+import { resolverGraphqlAdapter } from '~/main/adapters/resolver-graphql-adapter';
 import { ListCoursesController } from '~/presentation/controllers/list-courses';
 import { Controller } from '~/presentation/protocols';
 import { Course } from '../../models/course';
@@ -16,6 +17,7 @@ export class ListAllCoursesResolvers {
   }
   @Query(() => [Course])
   async courses() {
-    return await this.prisma.course.findMany();
+    //return await this.prisma.course.findMany();
+    return resolverGraphqlAdapter(this.controller);
   }
 }
