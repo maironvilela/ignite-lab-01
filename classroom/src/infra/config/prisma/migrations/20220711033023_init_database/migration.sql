@@ -1,16 +1,16 @@
 -- CreateTable
-CREATE TABLE "User" (
-    "id" SERIAL NOT NULL,
+CREATE TABLE "Course" (
+    "id" TEXT NOT NULL,
     "title" TEXT NOT NULL,
     "slug" TEXT NOT NULL,
     "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "updatedAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
 
-    CONSTRAINT "User_pkey" PRIMARY KEY ("id")
+    CONSTRAINT "Course_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_title_key" ON "User"("title");
+CREATE UNIQUE INDEX "Course_title_key" ON "Course"("title");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_slug_key" ON "User"("slug");
+CREATE UNIQUE INDEX "Course_slug_key" ON "Course"("slug");

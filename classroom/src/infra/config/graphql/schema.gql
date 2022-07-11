@@ -9,5 +9,5 @@ type Course {
 }
 
 type Query {
-  hello: [Course!]!
+  courses: [Course!]!
 }

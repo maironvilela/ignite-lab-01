@@ -10,8 +10,8 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model course {
-  id        Int      @id @default(autoincrement())
+model Course {
+  id        String   @id @default(uuid())
   title     String   @unique
   slug      String   @unique
   createdAt DateTime @default(now())
