@@ -1,22 +1,24 @@
 import {
   AddCourseRepository,
   AddCourseRepositoryRequest,
-  AddCourseRepositoryResponse
+  AddCourseRepositoryResponse,
+  SlugGenerator
 } from '~/data/protocols';
 
 import { AddCourseService } from './add-course.service';
 
 interface MakeSutTypes {
   sut: AddCourseService;
-  repository: AddCourseRepository;
+  repositoryStub: AddCourseRepository;
+  slugGeneratorStub: SlugGenerator;
 }
 
 const makeSut = (): MakeSutTypes => {
-  const repository = makeAddCourseRepository();
-  const sut = new AddCourseService(repository);
-  return { sut, repository };
+  const repositoryStub = makeAddCourseRepository();
+  const slugGeneratorStub = makeSlugGenerateStub();
+  const sut = new AddCourseService(repositoryStub, slugGeneratorStub);
+  return { sut, repositoryStub, slugGeneratorStub };
 };
-
 const makeAddCourseRepository = (): AddCourseRepository => {
   class AddCourseRepositoryStub implements AddCourseRepository {
     async addCourse(
@@ -25,7 +27,7 @@ const makeAddCourseRepository = (): AddCourseRepository => {
       return await new Promise((resolve) =>
         resolve({
           ...data,
-          id: 'id',
+          id: 'valid_id',
           createdAt: new Date(),
           updatedAt: new Date(),
         }),
@@ -35,27 +37,43 @@ const makeAddCourseRepository = (): AddCourseRepository => {
 
   return new AddCourseRepositoryStub();
 };
+const makeSlugGenerateStub = (): SlugGenerator => {
+  class SlugGenerateStub implements SlugGenerator {
+    generate(value: string): string {
+      return value.replace(' ', '-');
+    }
+  }
+  return new SlugGenerateStub();
+};
 
 describe('AddCourseService', () => {
-  const { sut } = makeSut();
   it('should be able return Course', async () => {
+    const { sut } = makeSut();
+
     const dataFaker = {
       title: 'Curso ReactJS',
-      slug: 'curso-reactjs',
     };
+
+    jest.useFakeTimers('modern').setSystemTime(new Date(2022, 10, 1));
+
     const course = await sut.execute(dataFaker);
 
-    expect(course).toHaveProperty('id');
+    expect(course).toEqual({
+      id: 'valid_id',
+      title: 'Curso ReactJS',
+      slug: 'curso-reactjs',
+      createdAt: new Date(),
+      updatedAt: new Date(),
+    });
   });
 
   it('should be able call the function addCourse with valid params', async () => {
-    const { sut, repository } = makeSut();
+    const { sut, repositoryStub } = makeSut();
     const dataFaker = {
       title: 'Curso ReactJS',
-      slug: 'curso-reactjs',
     };
 
-    const addCourseSpy = jest.spyOn(repository, 'addCourse');
+    const addCourseSpy = jest.spyOn(repositoryStub, 'addCourse');
 
     await sut.execute(dataFaker);
 
@@ -63,5 +81,18 @@ describe('AddCourseService', () => {
       title: 'Curso ReactJS',
       slug: 'curso-reactjs',
     });
+  });
+
+  it('should be able call the function generate with valid params', async () => {
+    const { sut, slugGeneratorStub } = makeSut();
+    const dataFaker = {
+      title: 'Curso ReactJS',
+    };
+
+    const generateSpy = jest.spyOn(slugGeneratorStub, 'generate');
+
+    await sut.execute(dataFaker);
+
+    expect(generateSpy).toHaveBeenCalledWith('curso reactjs');
   });
 });
