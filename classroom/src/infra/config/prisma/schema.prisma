@@ -10,10 +10,39 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model Student {
+  id String @id @default(uuid())
+
+  enrollments Enrollment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+//curso
 model Course {
-  id        String   @id @default(uuid())
-  title     String   @unique
-  slug      String   @unique
+  id    String @id @default(uuid())
+  title String @unique
+  slug  String @unique
+
+  enrolledOn Enrollment[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+}
+
+// inscrição
+model Enrollment {
+  id String @id @default(uuid())
+
+  Student   Student @relation(fields: [studentId], references: [id])
+  studentId String
+
+  Course   Course @relation(fields: [courseId], references: [id])
+  courseId String
+
+  cancelAt DateTime?
+
   createdAt DateTime @default(now())
   updatedAt DateTime @default(now()) @updatedAt
 
