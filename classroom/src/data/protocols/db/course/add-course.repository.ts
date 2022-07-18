@@ -1,12 +1,14 @@
 import { Course } from '~/domain/models';
 
-export type AddCourseRequest = {
+export type AddCourseRepositoryRequest = {
   title: string;
   slug: string;
 };
 
-export type AddCourseResponse = Course;
+export type AddCourseRepositoryResponse = Course;
 
 export interface AddCourseRepository {
-  addCourse(data: Request): Promise<AddCourseResponse>;
+  addCourse(
+    data: AddCourseRepositoryRequest,
+  ): Promise<AddCourseRepositoryResponse>;
 }
