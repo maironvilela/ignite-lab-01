@@ -1,8 +1,10 @@
-import { Injectable } from '@nestjs/common';
+import { AddCourseServiceRequest, AddCourseServiceResponse } from '~/data/dto';
+import { AddCourseUseCase } from '~/domain/usecases';
 
-@Injectable()
-export class AddCourseService {
-  async addCourse() {
-    console.log('Teste');
+export class AddCourseService implements AddCourseUseCase {
+  async execute(
+    data: AddCourseServiceRequest,
+  ): Promise<AddCourseServiceResponse> {
+    return { ...data, id: 'id', createdAt: new Date(), updatedAt: new Date() };
   }
 }
