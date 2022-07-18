@@ -1,3 +1,3 @@
 export interface SlugGenerator {
-  generate(value: string): string;
+  generate(value: string): Promise<string>;
 }

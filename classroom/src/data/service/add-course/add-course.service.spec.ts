@@ -49,8 +49,8 @@ const makeAddCourseRepository = (): AddCourseRepository => {
 
 const makeSlugGenerateStub = (): SlugGenerator => {
   class SlugGenerateStub implements SlugGenerator {
-    generate(value: string): string {
-      return value.replace(" ", "-");
+    async generate(value: string): Promise<string> {
+      return new Promise((resolve) => resolve(value.replace(" ", "-")));
     }
   }
 
@@ -100,7 +100,7 @@ describe("AddCourseService", () => {
     });
   });
 
-  it("should be able call the function generate with valid params", async () => {
+  it("should be able call the function generateSlug with valid params", async () => {
     const { sut, slugGeneratorStub } = makeSut();
 
     const dataFaker = {
@@ -112,5 +112,21 @@ describe("AddCourseService", () => {
     await sut.execute(dataFaker);
 
     expect(generateSpy).toHaveBeenCalledWith("curso reactjs");
+  });
+  it("should be able throw exception if slug generation fails ", async () => {
+    const { sut, slugGeneratorStub } = makeSut();
+    const data = {
+      title: "Curso React"
+    };
+
+    jest
+      .spyOn(slugGeneratorStub, "generate")
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error()))
+      );
+
+    const promise = sut.execute(data);
+
+    await expect(promise).rejects.toThrow();
   });
 });
