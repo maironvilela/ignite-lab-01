@@ -1,12 +1,16 @@
 import { AddProductUseCase } from '~/domain/usecases';
+import { ProductAlreadyRegisteredError } from '~/presentation/error/product-already-registered-error';
+import {
+  badRequest,
+  internalServerError,
+  ok
+} from '~/presentation/helpers/http-helpers';
 import {
   Controller,
   HttpRequest,
   HttpResponse
 } from '~/presentation/protocols';
-import { ProductAlreadyRegisteredError } from '../error/product-already-registered-error';
-import { badRequest, internalServerError, ok } from '../helpers/http-helpers';
-import { ProductViewModel } from '../view-models/product';
+import { ProductViewModel } from '~/presentation/view-models';
 
 export class AddProductController implements Controller {
   constructor(private addProduct: AddProductUseCase) {}

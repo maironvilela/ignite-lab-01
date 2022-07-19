@@ -1,6 +1,6 @@
 import { Args, Mutation, Resolver } from '@nestjs/graphql';
 import { resolverAdapter } from '~/main/adapters';
-import { AddProductControllerFactory } from '~/main/factories/add-product';
+import { AddProductControllerFactory } from '~/main/factories';
 import { CreateProductInput } from '~/main/graphql/inputs/CreateProductInput';
 import { Product } from '~/main/graphql/models/product';
 

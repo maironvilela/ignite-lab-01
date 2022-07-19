@@ -42,7 +42,7 @@ describe('ListAllPurchasesService', () => {
     expect(result.length).toEqual(10);
   });
 
-  it('Should be able call function listAll purchases', async () => {
+  it('Should be able call listAll function', async () => {
     const { sut, repositoryStub } = makeSut();
 
     const listAllSpy = jest.spyOn(repositoryStub, 'listAll');
@@ -50,5 +50,18 @@ describe('ListAllPurchasesService', () => {
     await sut.execute();
 
     expect(listAllSpy).toHaveBeenCalled();
+  });
+
+  it('Should be able throw exception if listAll function fails ', async () => {
+    const { sut, repositoryStub } = makeSut();
+
+    jest
+      .spyOn(repositoryStub, 'listAll')
+      .mockReturnValueOnce(
+        new Promise((resolve, reject) => reject(new Error()))
+      );
+    const promise = sut.execute();
+
+    await expect(promise).rejects.toThrow();
   });
 });

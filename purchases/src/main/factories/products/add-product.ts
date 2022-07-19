@@ -3,7 +3,7 @@ import { AddProductService } from '~/data/services';
 import { AddProductUseCase } from '~/domain/usecases';
 import { PrismaService } from '~/infra/db/prisma/prisma.service';
 import { ProductRepository } from '~/infra/db/repositories/product/product-repository';
-import { AddProductController } from '~/presentation/controllers/add-products';
+import { AddProductController } from '~/presentation/controllers';
 import { Controller } from '~/presentation/protocols';
 @Injectable()
 export class AddProductControllerFactory {

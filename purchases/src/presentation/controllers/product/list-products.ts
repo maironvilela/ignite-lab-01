@@ -4,8 +4,8 @@ import {
   HttpRequest,
   HttpResponse
 } from '~/presentation/protocols';
-import { internalServerError, ok } from '../helpers/http-helpers';
-import { ProductViewModel } from '../view-models/product';
+import { internalServerError, ok } from '../../helpers/http-helpers';
+import { ProductViewModel } from '../../view-models/product';
 
 export class ListProductsController implements Controller {
   constructor(private listProduct: ListProductsUseCase) {}

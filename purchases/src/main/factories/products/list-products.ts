@@ -4,7 +4,7 @@ import { ListProductService } from '~/data/services/product/list-products-servic
 import { ListProductsUseCase } from '~/domain/usecases/product/list-products';
 import { PrismaService } from '~/infra/db/prisma/prisma.service';
 import { ProductRepository } from '~/infra/db/repositories/product/product-repository';
-import { ListProductsController } from '~/presentation/controllers/list-products';
+import { ListProductsController } from '~/presentation/controllers';
 import { Controller } from '~/presentation/protocols';
 
 @Injectable()
