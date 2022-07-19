@@ -1,20 +1,12 @@
-import { faker } from '@faker-js/faker';
+import { ListAllPurchasesRepository } from '~/data/protocols';
 import { Purchases } from '~/domain/models';
 import { ListAllPurchasesUseCase } from '~/domain/usecases';
 
 export class ListAllPurchasesService implements ListAllPurchasesUseCase {
-  listAll(): Promise<Purchases[]> {
-    const purchases: Purchases[] = [];
+  constructor(private repository: ListAllPurchasesRepository) {}
+  async execute(): Promise<Purchases[]> {
+    const purchases = await this.repository.listAll();
 
-    for (let i = 0; i < 10; i++) {
-      purchases.push({
-        id: faker.datatype.uuid(),
-        status: faker.datatype.string(),
-        createdAt: faker.date.past(),
-        updatedAt: faker.date.future()
-      });
-    }
-
-    return new Promise((resolve) => resolve(purchases));
+    return purchases;
   }
 }
