@@ -11,6 +11,7 @@ export class AddCourseService implements AddCourseUseCase {
   async execute({
     title
   }: AddCourseServiceRequest): Promise<AddCourseServiceResponse> {
+    console.log(title);
     const slug = await this.slugGenerator.generate(title.toLowerCase());
     const course = await this.repository.addCourse({ title, slug });
     return course;

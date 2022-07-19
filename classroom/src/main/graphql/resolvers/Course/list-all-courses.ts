@@ -1,14 +1,12 @@
-import { Query, Resolver } from '@nestjs/graphql';
-import { resolverGraphqlAdapter } from '~/main/adapters/resolver-graphql-adapter';
-import { ListCourseControllerFactory } from '~/main/factories/list-course-controller-factory';
-import { Controller } from '~/presentation/protocols';
-import { Course } from '../../models/course';
+import { Query, Resolver } from "@nestjs/graphql";
+import { resolverGraphqlAdapter } from "~/main/adapters/resolver-graphql-adapter";
+import { ListCourseControllerFactory } from "~/main/factories/list-course-controller-factory";
+import { Course } from "../../models/course";
 
 @Resolver()
 export class ListAllCoursesResolvers {
-  private controller: Controller;
   constructor(
-    private listCourseControllerFactory: ListCourseControllerFactory,
+    private listCourseControllerFactory: ListCourseControllerFactory
   ) {}
   @Query(() => [Course])
   async courses() {
