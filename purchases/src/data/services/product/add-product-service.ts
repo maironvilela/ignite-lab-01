@@ -13,15 +13,16 @@ export class AddProductService implements AddProductUseCase {
   ) {}
 
   async add({ title }: AddProductModel): Promise<ProductDTO> {
-    const slug = title.replace(' ', '-').toLocaleLowerCase();
-
     const isProductExists = await this.findProductByTitleRepository.findByTitle(
       title
     );
 
     if (isProductExists) {
-      return null;
+      throw new Error('Product already exists');
     }
+
+    const slug = title.replace(' ', '-').toLocaleLowerCase();
+
     return await this.addProductRepository.add({ title, slug });
   }
 }
