@@ -5,6 +5,5 @@ export const resolverAdapter = async (
   request?: HttpRequest
 ): Promise<any> => {
   const httpResponse = await controller.handle(request);
-  console.log(httpResponse);
   return httpResponse.body;
 };

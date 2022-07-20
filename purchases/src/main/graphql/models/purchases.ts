@@ -1,4 +1,5 @@
 import { Field, ID, ObjectType } from '@nestjs/graphql';
+import { Product } from './product';
 
 @ObjectType()
 export class Purchases {
@@ -10,4 +11,8 @@ export class Purchases {
 
   @Field()
   createdAt: Date;
+
+  @Field(() => Product)
+  product: Product;
+  productId: string;
 }

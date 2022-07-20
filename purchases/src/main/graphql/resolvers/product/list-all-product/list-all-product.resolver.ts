@@ -3,7 +3,7 @@ import { resolverAdapter } from '~/main/adapters';
 import { ListProductControllerFactory } from '~/main/factories';
 import { Product } from '~/main/graphql/models/product';
 
-@Resolver()
+@Resolver(() => Product)
 export class ListAllProductResolver {
   constructor(
     private listProductsControllerFactory: ListProductControllerFactory

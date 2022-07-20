@@ -12,6 +12,7 @@ type Purchases {
   id: ID!
   status: String!
   createdAt: DateTime!
+  product: Product!
 }
 
 """
