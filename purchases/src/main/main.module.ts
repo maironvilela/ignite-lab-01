@@ -10,6 +10,8 @@ import { CreateProductResolver } from './graphql/resolvers/product/create-produc
 import { ListAllProductResolver } from './graphql/resolvers/product/list-all-product/list-all-product.resolver';
 import { ListAllPurchasesResolver } from './graphql/resolvers/purchases/list-all-product.resolver';
 
+import { ConfigModule } from '@nestjs/config';
+
 @Module({
   providers: [
     ListAllProductResolver,
@@ -23,6 +25,11 @@ import { ListAllPurchasesResolver } from './graphql/resolvers/purchases/list-all
 
     PrismaService
   ],
-  imports: [PresentationModule, PrismaService, InfraModule]
+  imports: [
+    PresentationModule,
+    PrismaService,
+    InfraModule,
+    ConfigModule.forRoot()
+  ]
 })
 export class MainModule {}

@@ -5,13 +5,13 @@ import {
   UnauthorizedException
 } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { expressjwt as jwt } from 'express-jwt';
+import { GqlExecutionContext } from '@nestjs/graphql';
+import expressjwt from 'express-jwt';
 import { expressJwtSecret } from 'jwks-rsa';
 import { promisify } from 'node:util';
 
 @Injectable()
 export class AuthorizationGuard implements CanActivate {
-  // eslint-disable-next-line prettier/prettier
   private AUTH0_AUDIENCE: string;
   private AUTH0_DOMAIN: string;
 
@@ -21,15 +21,17 @@ export class AuthorizationGuard implements CanActivate {
   }
 
   async canActivate(context: ExecutionContext): Promise<boolean> {
+    /* Para API REST
     const httpContext = context.switchToHttp();
     const req = httpContext.getRequest();
     const res = httpContext.getResponse();
+    */
 
     // GraphQL
-    //const { req, res } = GqlExecutionContext.create(context).getContext();
+    const { req, res } = GqlExecutionContext.create(context).getContext();
 
     const checkJWT = promisify(
-      jwt({
+      expressjwt({
         secret: expressJwtSecret({
           cache: true,
           rateLimit: true,
