@@ -1,10 +1,10 @@
 import { ListAllPurchasesRepository } from '~/data/protocols';
-import { Purchases } from '~/domain/models';
+import { Purchase } from '~/domain/models';
 import { ListAllPurchasesUseCase } from '~/domain/usecases';
 
 export class ListAllPurchasesService implements ListAllPurchasesUseCase {
   constructor(private repository: ListAllPurchasesRepository) {}
-  async execute(): Promise<Purchases[]> {
+  async execute(): Promise<Purchase[]> {
     const purchases = await this.repository.listAll();
     return purchases;
   }

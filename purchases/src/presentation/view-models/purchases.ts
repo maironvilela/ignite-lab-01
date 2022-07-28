@@ -1,4 +1,4 @@
-import { Purchases } from '~/domain/models';
+import { Purchase } from '~/domain/models';
 
 export class PurchasesViewModel {
   id: string;
@@ -6,7 +6,7 @@ export class PurchasesViewModel {
   createdAt: string;
   updatedAt: string;
 
-  static map(entity: Purchases): PurchasesViewModel {
+  static map(entity: Purchase): PurchasesViewModel {
     const purchasesViewModel = {
       ...entity,
       createdAt: entity.createdAt.toISOString(),
@@ -15,7 +15,7 @@ export class PurchasesViewModel {
     return purchasesViewModel;
   }
 
-  static mapCollection(entities: Purchases[]): PurchasesViewModel[] {
+  static mapCollection(entities: Purchase[]): PurchasesViewModel[] {
     return entities.map((entity) => PurchasesViewModel.map(entity));
   }
 }

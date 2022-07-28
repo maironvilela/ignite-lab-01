@@ -21,6 +21,7 @@ import { PresentationModule } from './presentation/presentation.module';
       autoSchemaFile: path.resolve(process.cwd(), 'src/schema.gql')
     }),
     PresentationModule
-  ]
+  ],
+  providers: []
 })
 export class AppModule {}

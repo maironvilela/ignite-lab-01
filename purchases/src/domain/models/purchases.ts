@@ -1,4 +1,4 @@
-export interface Purchases {
+export interface Purchase {
   id: string;
   status: string;
   createdAt?: Date;

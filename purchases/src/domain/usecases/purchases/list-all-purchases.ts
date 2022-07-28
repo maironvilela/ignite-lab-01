@@ -1,5 +1,5 @@
-import { Purchases } from '~/domain/models';
+import { Purchase } from '~/domain/models';
 
 export interface ListAllPurchasesUseCase {
-  execute(): Promise<Purchases[]>;
+  execute(): Promise<Purchase[]>;
 }

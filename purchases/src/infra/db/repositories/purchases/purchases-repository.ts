@@ -1,11 +1,30 @@
-import { ListAllPurchasesRepository } from '~/data/protocols';
-import { Purchases } from '~/domain/models';
+import {
+  AddPurchaseParams,
+  AddPurchaseRepository,
+  ListAllPurchasesRepository
+} from '~/data/protocols';
+import { Purchase } from '~/domain/models';
 import { PrismaService } from '../../prisma/prisma.service';
 
-export class PurchasesPrismaRepository implements ListAllPurchasesRepository {
+export class PurchasesPrismaRepository
+  implements ListAllPurchasesRepository, AddPurchaseRepository
+{
   constructor(private prisma: PrismaService) {}
+  async addPurchases({
+    customerId,
+    productId
+  }: AddPurchaseParams): Promise<Purchase> {
+    const purchase = this.prisma.purchases.create({
+      data: {
+        customerId,
+        productId
+      }
+    });
 
-  async listAll(): Promise<Purchases[]> {
+    return purchase;
+  }
+
+  async listAll(): Promise<Purchase[]> {
     return await this.prisma.purchases.findMany();
   }
 }

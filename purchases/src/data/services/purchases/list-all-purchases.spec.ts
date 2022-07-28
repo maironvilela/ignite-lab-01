@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 import { ListAllPurchasesRepository } from '~/data/protocols';
-import { Purchases } from '~/domain/models';
+import { Purchase } from '~/domain/models';
 import { ListAllPurchasesUseCase } from '~/domain/usecases';
 import { ListAllPurchasesService } from './list-all-purchases';
 
@@ -11,8 +11,8 @@ type MakeSutTypes = {
 
 const makeRepositoryStub = (): ListAllPurchasesRepository => {
   class ListAllPurchasesRepositoryStub implements ListAllPurchasesRepository {
-    listAll(): Promise<Purchases[]> {
-      const purchases: Purchases[] = [];
+    listAll(): Promise<Purchase[]> {
+      const purchases: Purchase[] = [];
 
       for (let i = 0; i < 10; i++) {
         purchases.push({

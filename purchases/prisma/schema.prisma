@@ -13,13 +13,14 @@ datasource db {
 model Customer {
   id String @id @default(uuid())
 
+  authUserId String? @unique
+
   createdAt DateTime    @default(now())
   updatedAt DateTime    @default(now()) @updatedAt
   Purchases Purchases[]
 }
 
 model Product {
-
   id String @id @default(uuid())
 
   title String @unique

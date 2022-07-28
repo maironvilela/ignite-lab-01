@@ -1,3 +1,3 @@
-import { Purchases } from '~/domain/models';
+import { Purchase } from '~/domain/models';
 
-export type ListAllPurchasesResponse = Purchases;
+export type ListAllPurchasesResponse = Purchase;
