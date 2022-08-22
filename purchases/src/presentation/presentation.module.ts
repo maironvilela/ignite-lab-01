@@ -4,12 +4,14 @@ import {
   AddProductController,
   ListAllPurchasesController
 } from './controllers';
+import { MeController } from './controllers/customer/me';
 import { AddPurchaseController } from './controllers/purchases/add-purchase';
 @Module({
   providers: [
     AddProductController,
     ListAllPurchasesController,
-    AddPurchaseController
+    AddPurchaseController,
+    MeController
   ],
   exports: [
     AddProductController,

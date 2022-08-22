@@ -4,7 +4,8 @@ import { InfraModule } from '~/infra/infra.module';
 import { PresentationModule } from '~/presentation/presentation.module';
 import {
   AddPurchaseControllerFactor,
-  ListAllPurchasesControllerFactory
+  ListAllPurchasesControllerFactory,
+  MeControllerFactory
 } from './factories';
 import { AddProductControllerFactory } from './factories/products/add-product';
 import { FindProductByIdFactory } from './factories/products/find-product-by-id';
@@ -14,6 +15,8 @@ import { ListAllProductResolver } from './graphql/resolvers/product/list-all-pro
 import { ListAllPurchasesResolver } from './graphql/resolvers/purchases/list-all-product.resolver';
 
 import { ConfigModule } from '@nestjs/config';
+import { ListAllPurchasesFromCustomerServiceFactory } from './factories/purchases/list-all-purchases-from-customer';
+import { MeResolver } from './graphql/resolvers/customer/me/me.resolver';
 import { CreatePurchasesResolver } from './graphql/resolvers/purchases/create-purchases/create-purchases.resolver';
 
 @Module({
@@ -22,11 +25,15 @@ import { CreatePurchasesResolver } from './graphql/resolvers/purchases/create-pu
     CreateProductResolver,
     CreatePurchasesResolver,
     ListAllPurchasesResolver,
+    MeResolver,
 
     AddProductControllerFactory,
     AddPurchaseControllerFactor,
     ListProductControllerFactory,
     ListAllPurchasesControllerFactory,
+    MeControllerFactory,
+    ListAllPurchasesFromCustomerServiceFactory,
+
     FindProductByIdFactory,
 
     PrismaService
