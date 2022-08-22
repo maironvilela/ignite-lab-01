@@ -15,6 +15,7 @@ import { ListAllProductResolver } from './graphql/resolvers/product/list-all-pro
 import { ListAllPurchasesResolver } from './graphql/resolvers/purchases/list-all-product.resolver';
 
 import { ConfigModule } from '@nestjs/config';
+import { KafkaService } from '~/infra/messaging/kafka/config/kafka.service';
 import { ListAllPurchasesFromCustomerServiceFactory } from './factories/purchases/list-all-purchases-from-customer';
 import { MeResolver } from './graphql/resolvers/customer/me/me.resolver';
 import { CreatePurchasesResolver } from './graphql/resolvers/purchases/create-purchases/create-purchases.resolver';
@@ -36,7 +37,8 @@ import { CreatePurchasesResolver } from './graphql/resolvers/purchases/create-pu
 
     FindProductByIdFactory,
 
-    PrismaService
+    PrismaService,
+    KafkaService
   ],
   imports: [
     PresentationModule,

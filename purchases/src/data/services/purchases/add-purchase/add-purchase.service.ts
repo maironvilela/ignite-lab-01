@@ -4,6 +4,7 @@ import {
   FindCustomerByAuthUserIdRepository,
   FindProductByIdRepository
 } from '~/data/protocols';
+import { EmitMessageNewPurchase } from '~/data/protocols/messaging/emit-message-new-purchases';
 import {
   AddPurchaseParams,
   AddPurchaseResponse,
@@ -15,7 +16,8 @@ export class AddPurchaseService implements AddPurchaseUseCase {
     private findCustumerByAuthUserIdRepository: FindCustomerByAuthUserIdRepository,
     private addCustumerRepository: AddCustomerRepository,
     private findProductByIdRepository: FindProductByIdRepository,
-    private addPurchaseRepository: AddPurchaseRepository
+    private addPurchaseRepository: AddPurchaseRepository,
+    private emitMessageNewPurchase: EmitMessageNewPurchase
   ) {}
 
   async addPurchase({
@@ -43,7 +45,16 @@ export class AddPurchaseService implements AddPurchaseUseCase {
       productId
     });
 
-    console.log('Verificando product', purchase);
+    await this.emitMessageNewPurchase.emit({
+      custumer: {
+        authUserId: customer.authUserId
+      },
+      product: {
+        id: product.id,
+        title: product.title,
+        slug: product.slug
+      }
+    });
 
     return purchase;
   }
