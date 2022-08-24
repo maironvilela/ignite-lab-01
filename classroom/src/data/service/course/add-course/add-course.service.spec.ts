@@ -2,7 +2,7 @@ import {
   AddCourseRepository,
   AddCourseRepositoryRequest,
   AddCourseRepositoryResponse,
-  SlugGenerator,
+  SlugGenerator
 } from '~/data/protocols';
 
 import { AddCourseService } from './add-course.service';
@@ -23,15 +23,15 @@ const makeSut = (): MakeSutTypes => {
 const makeAddCourseRepository = (): AddCourseRepository => {
   class AddCourseRepositoryStub implements AddCourseRepository {
     async addCourse(
-      data: AddCourseRepositoryRequest
+      data: AddCourseRepositoryRequest,
     ): Promise<AddCourseRepositoryResponse> {
-      return await new Promise((resolve) =>
+      return await new Promise(resolve =>
         resolve({
           ...data,
           id: 'valid_id',
           createdAt: new Date(),
           updatedAt: new Date(),
-        })
+        }),
       );
     }
   }
@@ -42,7 +42,7 @@ const makeAddCourseRepository = (): AddCourseRepository => {
 const makeSlugGenerateStub = (): SlugGenerator => {
   class SlugGenerateStub implements SlugGenerator {
     async generate(value: string): Promise<string> {
-      return new Promise((resolve) => resolve(value.replace(' ', '-')));
+      return new Promise(resolve => resolve(value.replace(' ', '-')));
     }
   }
 
@@ -94,7 +94,7 @@ describe('AddCourseService', () => {
     jest
       .spyOn(repositoryStub, 'addCourse')
       .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
+        new Promise((resolve, reject) => reject(new Error())),
       );
 
     const promise = sut.execute(data);
@@ -125,7 +125,7 @@ describe('AddCourseService', () => {
     jest
       .spyOn(slugGeneratorStub, 'generate')
       .mockReturnValueOnce(
-        new Promise((resolve, reject) => reject(new Error()))
+        new Promise((resolve, reject) => reject(new Error())),
       );
 
     const promise = sut.execute(data);

@@ -5,4 +5,6 @@ export type HttpResponse<T = any> = {
 export interface HttpRequest {
   body?: any;
   headers?: any;
+  query?: any;
+  params?: any;
 }
