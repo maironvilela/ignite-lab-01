@@ -1,11 +1,11 @@
-import { CourseDTO } from "~/data/dto";
+import { CourseDTO } from '~/data/dto';
 import {
   AddCourseRepository,
   AddCourseRepositoryRequest,
-  ListCoursesRepository
-} from "~/data/protocols";
-import { Course } from "~/domain/models";
-import { PrismaService } from "../../prisma.service";
+  ListCoursesRepository,
+} from '~/data/protocols';
+import { Course } from '~/domain/models';
+import { PrismaService } from '../../prisma.service';
 
 export class CoursePrismaRepository
   implements ListCoursesRepository, AddCourseRepository

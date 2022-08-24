@@ -18,7 +18,7 @@ console.log(path.resolve(process.cwd(), 'src/graphql/schema.gql'));
       driver: ApolloDriver,
       autoSchemaFile: path.resolve(
         process.cwd(),
-        'src/infra/config/graphql/schema.gql',
+        'src/infra/config/graphql/schema.gql'
       ),
     }),
     InfraModule,

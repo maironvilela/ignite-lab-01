@@ -2,7 +2,7 @@ import {
   INestApplication,
   Injectable,
   OnModuleDestroy,
-  OnModuleInit
+  OnModuleInit,
 } from '@nestjs/common';
 import { PrismaClient } from '@prisma/client';
 

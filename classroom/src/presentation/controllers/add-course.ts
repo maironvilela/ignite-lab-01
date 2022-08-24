@@ -1,6 +1,6 @@
-import { AddCourseService } from "~/data/service/add-course/add-course.service";
-import { internalServerError, ok } from "../helpers";
-import { Controller, HttpRequest, HttpResponse } from "../protocols";
+import { AddCourseService } from '~/data/service/course/add-course/add-course.service';
+import { internalServerError, ok } from '../helpers';
+import { Controller, HttpRequest, HttpResponse } from '../protocols';
 
 export class AddCourseController implements Controller {
   constructor(private addCourseService: AddCourseService) {}

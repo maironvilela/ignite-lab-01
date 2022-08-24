@@ -2,10 +2,10 @@ import {
   AddCourseRepository,
   AddCourseRepositoryRequest,
   AddCourseRepositoryResponse,
-  SlugGenerator
-} from "~/data/protocols";
+  SlugGenerator,
+} from '~/data/protocols';
 
-import { AddCourseService } from "./add-course.service";
+import { AddCourseService } from './add-course.service';
 
 interface MakeSutTypes {
   sut: AddCourseService;
@@ -28,9 +28,9 @@ const makeAddCourseRepository = (): AddCourseRepository => {
       return await new Promise((resolve) =>
         resolve({
           ...data,
-          id: "valid_id",
+          id: 'valid_id',
           createdAt: new Date(),
-          updatedAt: new Date()
+          updatedAt: new Date(),
         })
       );
     }
@@ -42,57 +42,57 @@ const makeAddCourseRepository = (): AddCourseRepository => {
 const makeSlugGenerateStub = (): SlugGenerator => {
   class SlugGenerateStub implements SlugGenerator {
     async generate(value: string): Promise<string> {
-      return new Promise((resolve) => resolve(value.replace(" ", "-")));
+      return new Promise((resolve) => resolve(value.replace(' ', '-')));
     }
   }
 
   return new SlugGenerateStub();
 };
 
-describe("AddCourseService", () => {
-  it("should be able add Course", async () => {
+describe('AddCourseService', () => {
+  it('should be able add Course', async () => {
     const { sut } = makeSut();
     const dataFaker = {
-      title: "Curso ReactJS"
+      title: 'Curso ReactJS',
     };
 
-    jest.useFakeTimers("modern").setSystemTime(new Date());
+    jest.useFakeTimers('modern').setSystemTime(new Date());
     const course = await sut.execute(dataFaker);
 
     expect(course).toEqual({
-      id: "valid_id",
-      title: "Curso ReactJS",
-      slug: "curso-reactjs",
+      id: 'valid_id',
+      title: 'Curso ReactJS',
+      slug: 'curso-reactjs',
       createdAt: new Date(),
-      updatedAt: new Date()
+      updatedAt: new Date(),
     });
   });
 
-  it("should be able call the function addCourse with valid params", async () => {
+  it('should be able call the function addCourse with valid params', async () => {
     const { sut, repositoryStub } = makeSut();
 
     const dataFaker = {
-      title: "Curso ReactJS"
+      title: 'Curso ReactJS',
     };
 
-    const addCourseSpy = jest.spyOn(repositoryStub, "addCourse");
+    const addCourseSpy = jest.spyOn(repositoryStub, 'addCourse');
 
     await sut.execute(dataFaker);
 
     expect(addCourseSpy).toHaveBeenCalledWith({
-      title: "Curso ReactJS",
-      slug: "curso-reactjs"
+      title: 'Curso ReactJS',
+      slug: 'curso-reactjs',
     });
   });
 
-  it("should be able throw exception if addCourseRepository fails ", async () => {
+  it('should be able throw exception if addCourseRepository fails ', async () => {
     const { sut, repositoryStub } = makeSut();
     const data = {
-      title: "Curso React"
+      title: 'Curso React',
     };
 
     jest
-      .spyOn(repositoryStub, "addCourse")
+      .spyOn(repositoryStub, 'addCourse')
       .mockReturnValueOnce(
         new Promise((resolve, reject) => reject(new Error()))
       );
@@ -102,28 +102,28 @@ describe("AddCourseService", () => {
     await expect(promise).rejects.toThrow();
   });
 
-  it("should be able call the function generateSlug with valid params", async () => {
+  it('should be able call the function generateSlug with valid params', async () => {
     const { sut, slugGeneratorStub } = makeSut();
 
     const dataFaker = {
-      title: "Curso ReactJS"
+      title: 'Curso ReactJS',
     };
 
-    const generateSpy = jest.spyOn(slugGeneratorStub, "generate");
+    const generateSpy = jest.spyOn(slugGeneratorStub, 'generate');
 
     await sut.execute(dataFaker);
 
-    expect(generateSpy).toHaveBeenCalledWith("curso reactjs");
+    expect(generateSpy).toHaveBeenCalledWith('curso reactjs');
   });
 
-  it("should be able throw exception if slug generation fails ", async () => {
+  it('should be able throw exception if slug generation fails ', async () => {
     const { sut, slugGeneratorStub } = makeSut();
     const data = {
-      title: "Curso React"
+      title: 'Curso React',
     };
 
     jest
-      .spyOn(slugGeneratorStub, "generate")
+      .spyOn(slugGeneratorStub, 'generate')
       .mockReturnValueOnce(
         new Promise((resolve, reject) => reject(new Error()))
       );

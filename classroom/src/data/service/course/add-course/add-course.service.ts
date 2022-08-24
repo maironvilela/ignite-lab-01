@@ -1,6 +1,6 @@
-import { AddCourseServiceRequest, AddCourseServiceResponse } from "~/data/dto";
-import { AddCourseRepository, SlugGenerator } from "~/data/protocols";
-import { AddCourseUseCase } from "~/domain/usecases";
+import { AddCourseServiceRequest, AddCourseServiceResponse } from '~/data/dto';
+import { AddCourseRepository, SlugGenerator } from '~/data/protocols';
+import { AddCourseUseCase } from '~/domain/usecases';
 
 export class AddCourseService implements AddCourseUseCase {
   constructor(
@@ -9,7 +9,7 @@ export class AddCourseService implements AddCourseUseCase {
   ) {}
 
   async execute({
-    title
+    title,
   }: AddCourseServiceRequest): Promise<AddCourseServiceResponse> {
     console.log(title);
     const slug = await this.slugGenerator.generate(title.toLowerCase());

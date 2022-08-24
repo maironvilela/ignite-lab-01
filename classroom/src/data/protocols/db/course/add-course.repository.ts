@@ -9,6 +9,6 @@ export type AddCourseRepositoryResponse = Course;
 
 export interface AddCourseRepository {
   addCourse(
-    data: AddCourseRepositoryRequest,
+    data: AddCourseRepositoryRequest
   ): Promise<AddCourseRepositoryResponse>;
 }
