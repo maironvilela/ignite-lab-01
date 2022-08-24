@@ -1,6 +1,6 @@
-import { Module } from '@nestjs/common';
-import { DataModule } from '~/data/data.module';
-import { ListCoursesController } from './controllers/list-courses';
+import { Module } from "@nestjs/common";
+import { DataModule } from "~/data/data.module";
+import { ListCoursesController } from "./controllers/list-courses";
 
 @Module({
   providers: [ListCoursesController],

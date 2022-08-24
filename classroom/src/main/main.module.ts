@@ -10,8 +10,8 @@ import { ListAllCoursesResolvers } from "./graphql/resolvers/Course/list-all-cou
     ListAllCoursesResolvers,
     ListCourseControllerFactory,
     AddCourseControllerFactory,
-    AddCourseResolvers
+    AddCourseResolvers,
   ],
-  imports: [InfraModule]
+  imports: [InfraModule],
 })
 export class MainModule {}
